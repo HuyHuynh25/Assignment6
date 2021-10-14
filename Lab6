@@ -1,0 +1,82 @@
+########################################################################
+##
+## CS 101 Lab
+## Program 6
+## Name: Huynh Gia Huy-Jim Huynh
+## Email: hghydv@umsystem.edu
+##
+## PROBLEM : Create a The Caesar Cipher is an encryption/decryption method 
+## that shifts the alphabet. you have a cipher that shifts by 1, A would become B, 
+## B would become C, Z would wrap and become A.  To decrypt that cipher you simply shift by -1.
+## ALGORITHM :
+##      Step 1: Start
+##      Step 2: Define function Encrypt
+##      Step 3: Define function Decrypt
+##      Step 4: Define function Menu
+##      Step 5: Make a loop that user's choice != 3
+##      Step 6: Call Print_menu function
+##      Step 7: if choice equal 1, call Encrypt function
+##      Step 8: if choice equal 2, call Decrypt function
+##      Step 9: if choice equal Q, break
+##      Step 10: End
+##ERROR HANDLING:
+##      N/A
+##
+## OTHER COMMENTS:
+##      Any special comments
+##
+########################################################################
+def Encrypt(string_text, int_key):
+    cipher = ''
+    for i in range(len(string_text)):
+        char = string_text[i]
+        if char.isupper():
+            cipher += chr((ord(char) + int_key - 65) % 26 + 65)
+        elif char.islower():
+            cipher += chr((ord(char) + int_key - 97) % 26 + 97)
+        else:
+            cipher += char
+    return cipher
+def Decrypt(string_text, int_key):
+    cipher = ''
+    for i in range(len(string_text)):
+        char = string_text[i]
+        if char.isupper():
+            cipher += chr((ord(char) - int_key - 65) % 26 + 65)
+        elif char.islower():
+            cipher += chr((ord(char) - int_key - 97) % 26 + 97)
+        else:
+            cipher += char
+    return cipher
+def Print_menu():
+    print()
+    print("Main Menu")
+    print("1) Encode a String")
+    print("2) Decode a String")
+    print("Q) Quit")
+    print("Enter your selection ==> ", end='')
+if __name__ == "__main__":
+    choice = 1
+    while choice != 3:
+        Print_menu()
+        choice = input()
+        if choice == '1':
+            print("\nEnter (brief) text to encrypt: ", end='')
+            string_text = input()
+            print("Enter the number to shift letters by: ", end='')
+            int_key = int(input())
+            ans = Encrypt(string_text, int_key)
+            print("Encrypted : {}".format(ans))
+        elif choice == '2':
+            print("\nEnter (brief) text to decrypt: ", end='')
+            string_text = input()
+            print("Enter the number to shift letters by: ", end='')
+            int_key = int(input())
+            ans = Decrypt(string_text, int_key)
+            print("Decrypted : {}".format(ans))
+        elif choice == 'Q':
+            break
+        else:
+            print("\nWrong Input")
+
+
